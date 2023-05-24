@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useMemo, useState } from "react";
-import Entypo from "@expo/vector-icons/Entypo";
+import Iconset from "@expo/vector-icons/MaterialCommunityIcons";
 import * as Font from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -12,12 +12,14 @@ import { PaperProvider } from "react-native-paper";
 import AppTheme from "./lib/components/AppTheme";
 import SignupScreen from "./lib/screens/signup/SignupScreen";
 import LoginScreen from "./lib/screens/login/LoginScreen";
+import { useUser } from "./lib/logic/auth";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
   const [splashScreenShown, setSplashScreenShown] = useState(false);
+  const user = useUser();
   useMemo(() => {
     store.setSplashScreenShown = setSplashScreenShown;
     store.setContext = (data) => {
@@ -28,7 +30,7 @@ export default function App() {
     async function prepare() {
       try {
         // Pre-load fonts, make any API calls you need to do here
-        await Font.loadAsync(Entypo.font);
+        await Font.loadAsync(Iconset.font);
       } catch (e) {
         console.warn(e);
       } finally {
@@ -46,12 +48,20 @@ export default function App() {
         <NavigationContainer>
           <StatusBar style="auto" />
           <Stack.Navigator screenOptions={{ headerShown: false }}>
-            {appIsReady && splashScreenShown ? (
+            {appIsReady && splashScreenShown && user !== undefined ? (
               <>
-                <Stack.Screen name="Onboarding" component={OnboardingScreen} />
-                <Stack.Screen name="Home" component={HomeScreen} />
-                <Stack.Screen name="Log In" component={LoginScreen} />
-                <Stack.Screen name="Sign Up" component={SignupScreen} />
+                {user ? (
+                  <Stack.Screen name="Main" component={HomeScreen} />
+                ) : (
+                  <>
+                    <Stack.Screen
+                      name="Onboarding"
+                      component={OnboardingScreen}
+                    />
+                    <Stack.Screen name="Log In" component={LoginScreen} />
+                    <Stack.Screen name="Sign Up" component={SignupScreen} />
+                  </>
+                )}
               </>
             ) : (
               <Stack.Screen
