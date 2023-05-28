@@ -3,9 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import Iconset from "@expo/vector-icons/MaterialCommunityIcons";
 import * as Font from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MySplashScreen from "./lib/screens/splash/SplashScreen";
-import HomeScreen from "./lib/screens/home/HomeScreen";
 import AppContext, { store } from "./lib/components/AppContext";
 import OnboardingScreen from "./lib/screens/onboarding/OnboardingScreen";
 import { PaperProvider } from "react-native-paper";
@@ -13,8 +11,8 @@ import AppTheme from "./lib/components/AppTheme";
 import SignupScreen from "./lib/screens/signup/SignupScreen";
 import LoginScreen from "./lib/screens/login/LoginScreen";
 import { useUser } from "./lib/logic/auth";
-
-const Stack = createNativeStackNavigator();
+import { Stack } from "./lib/components/navigators";
+import MainRoutes from "./lib/screens/MainRoutes";
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -51,7 +49,7 @@ export default function App() {
             {appIsReady && splashScreenShown && user !== undefined ? (
               <>
                 {user ? (
-                  <Stack.Screen name="Main" component={HomeScreen} />
+                  <Stack.Screen name="Main" component={MainRoutes} />
                 ) : (
                   <>
                     <Stack.Screen

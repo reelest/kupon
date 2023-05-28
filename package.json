@@ -13,6 +13,7 @@
     "@faker-js/faker": "^8.0.1",
     "@react-native-async-storage/async-storage": "1.17.11",
     "@react-navigation/drawer": "^6.6.2",
+    "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
     "@types/lodash": "^4.14.194",
     "@types/react": "~18.0.27",
@@ -25,11 +26,10 @@
     "expo-splash-screen": "^0.18.2",
     "expo-status-bar": "~1.4.4",
     "lodash": "^4.17.21",
-    "metro": "^0.76.4",
     "react": "18.2.0",
     "react-native": "0.71.8",
     "react-native-gesture-handler": "~2.9.0",
-    "react-native-masonry-list": "^2.16.1",
+    "react-native-pager-view": "6.1.2",
     "react-native-paper": "^5.8.0",
     "react-native-reanimated": "~2.14.4",
     "react-native-reanimated-carousel": "^3.3.2",
@@ -37,12 +37,14 @@
     "react-native-screens": "~3.20.0",
     "react-native-web": "~0.18.10",
     "react-simple-form-validator": "^0.3.1",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.4",
+    "expo-image-picker": "~14.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "eas-cli": "^3.13.0",
     "eslint": "^8.41.0",
+    "metro": "^0.76.4",
     "eslint-plugin-react": "^7.32.2"
   },
   "private": true
