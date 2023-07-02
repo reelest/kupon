@@ -14,7 +14,14 @@ jobs:
         with:
           node-version: 18.x
           cache: npm
-
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
       - name: 🏗 Setup EAS
         uses: expo/expo-github-action@v8
         with:
@@ -26,3 +33,15 @@ jobs:
 
       - name: 🚀 Build app
         run: eas build --non-interactive --local --platform android
+      - name: 🚀 Build development app
+        run: eas build --non-interactive --local --platform android --profile development
+      - name: Archive aab
+        uses: actions/upload-artifact@v3
+        with:
+          name: aab
+          path: /home/runner/work/kupon/kupon/*.aab
+      - name: Archive apk
+        uses: actions/upload-artifact@v3
+        with:
+          name: apk
+          path: /home/runner/work/kupon/kupon/*.apk
