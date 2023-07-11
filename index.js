@@ -1,13 +1,12 @@
 import { registerRootComponent } from "expo";
 import btoa from "btoa";
 import { Buffer } from "buffer";
-import { TextEncoder, TextDecoder } from "util";
-import 'formdata-polyfill/formdata.min.js'
-
+// import { TextEncoder, TextDecoder } from "util";
 global.btoa = btoa;
 global.Buffer = Buffer;
-global.TextEncoder = TextEncoder;
-global.TextDecoder = TextDecoder;
+// global.TextEncoder = TextEncoder;
+// global.TextDecoder = TextDecoder;
+import "formdata-polyfill/formdata.min.js";
 import App from "./App";
 Error.stackTraceLimit = 40;
 
